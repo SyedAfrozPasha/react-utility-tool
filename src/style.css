@@ -24,9 +24,11 @@ body {
   left: 0;
   padding-top: 5px;
   padding-bottom: 5px;
-  background-color: #e6fffa;
+  /* background-color: #e6fffa; */
+  background-color: #38b2ac;
   text-align: center;
-  border-top: 1px solid #38b2ac;
+  color: #fff;
+  /* border-top: 1px solid #38b2ac; */
 }
 
 .footer > ul {

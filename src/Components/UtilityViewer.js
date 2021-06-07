@@ -58,12 +58,40 @@ export default function JSONViewer() {
     }
   };
 
+  const setRemoveDuplicateFlag = e => {
+    let value = e.target.value;
+    if (value === 'true') {
+      setConfig({ ...config, removeDuplicates: true });
+    } else {
+      setConfig({ ...config, removeDuplicates: false });
+    }
+  };
+
   const runFormatter = () => {
     setIsSampleExample(false);
     if (inputData && !isObjectEmpty(config)) {
       setIsLoading(true);
       let input = inputData;
 
+      // Remove duplicates
+      if (config.removeDuplicates) {
+        let valueWithOneNewLine = input.replace(/(\r\n|\r|\n){2,}/g, '\n');
+        let arrayOfValues = valueWithOneNewLine.split('\n');
+        let hashObj = {};
+        let resultArray = [];
+        for (let val of arrayOfValues) {
+          hashObj[val] = (hashObj[val] || 0) + 1;
+          if (!(hashObj[val] > 1)) {
+            resultArray.push(val);
+          }
+        }
+        if (resultArray.length > 0) {
+          let resultString = resultArray.join();
+          input = resultString.replace(/,/g, '\n');
+        }
+      }
+
+      // Wrap each item
       if (
         config['element-start-separator'] ||
         config['element-end-separator']
@@ -87,6 +115,7 @@ export default function JSONViewer() {
         input = resultString.replace(/,/g, '\n');
       }
 
+      // Wrap entire content
       if (
         config['content-start-separator'] ||
         config['content-end-separator']
@@ -96,6 +125,7 @@ export default function JSONViewer() {
         input = `${startValue}${input}${endValue}`;
       }
 
+      // Add delimiter
       if (config['middle-separator']) {
         let valueWithOneNewLine = input.replace(/(\r\n|\r|\n){2,}/g, '\n');
         let splittedValues = valueWithOneNewLine.split('\n');
@@ -103,6 +133,7 @@ export default function JSONViewer() {
         input = splittedValues.join(`${separator}`);
       }
 
+      // Remove whitespaces
       if (config.removeWhiteSpace) {
         input = input.replace(/\s/g, '');
       }
@@ -310,7 +341,12 @@ export default function JSONViewer() {
         <div className="row flex mt-8">
           <div className="col w-screen">
             <div className="box border rounded flex flex-col shadow bg-white p-4 mb-8">
-              <div className="md:flex md:items-center mb-2">
+              <div className="bg-grey-lighter pb-2 mb-2 border-b">
+                <h3 className="text-lg text-grey-darker font-medium text-center">
+                  Converter Options
+                </h3>
+              </div>
+              <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
                   <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Wrap the entire content with start and end value
@@ -352,10 +388,10 @@ export default function JSONViewer() {
                 </div>
               </div>
 
-              <div className="md:flex md:items-center mb-2">
+              <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
                   <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                    Wrap the start and end value to each item
+                    Wrap each item with start and end value
                   </label>
                 </div>
                 <div className="md:w-2/3">
@@ -394,7 +430,7 @@ export default function JSONViewer() {
                 </div>
               </div>
 
-              <div className="md:flex md:items-center mb-2">
+              <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
                   <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Add any delimiter between each item
@@ -421,7 +457,7 @@ export default function JSONViewer() {
                 </div>
               </div>
 
-              <div className="md:flex md:items-center mb-2">
+              <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
                   <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Remove whitespaces?
@@ -446,6 +482,41 @@ export default function JSONViewer() {
                           name="removeWhiteSpace"
                           className="form-radio h-5 w-5 text-red-600"
                           onChange={setRemoveWhiteSpaceFlag}
+                          value={false}
+                          defaultChecked
+                        />
+                        <span className="ml-2 text-gray-700">No</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="md:flex md:items-center">
+                <div className="md:w-1/3">
+                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                    Remove duplicates?
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <div className="flex -mx-3 mb-2">
+                    <div className="w-full px-3 mb-6 md:mb-0 content-center">
+                      <label className="inline-flex items-center mt-3">
+                        <input
+                          type="radio"
+                          name="removeDuplicate"
+                          className="form-radio h-5 w-5 text-gray-600"
+                          onChange={setRemoveDuplicateFlag}
+                          value={true}
+                        />
+                        <span className="ml-2 text-gray-700">Yes</span>
+                      </label>
+                      <label className="inline-flex items-center mt-3 ml-4">
+                        <input
+                          type="radio"
+                          name="removeDuplicate"
+                          className="form-radio h-5 w-5 text-red-600"
+                          onChange={setRemoveDuplicateFlag}
                           value={false}
                           defaultChecked
                         />
