@@ -43,7 +43,7 @@ export default function Header() {
           <Link
             className={`block mt-4 md:inline-block md:mt-0 hover:text-black mr-4 ${
               splitLocation[1] === 'string-utility-tool'
-                ? 'border-b-2 border-gray-800 pb-2 text-gray-800 font-medium'
+                ? 'border-b-2 border-gray-800 pb-2 text-black font-medium'
                 : 'text-gray-800 font-medium'
             }`}
             to="/string-utility-tool"
@@ -53,7 +53,7 @@ export default function Header() {
           <Link
             className={`block mt-4 md:inline-block md:mt-0  hover:text-black mr-4 ${
               splitLocation[1] === 'json-viewer'
-                ? 'border-b-2 border-gray-800 pb-2 text-gray-800 font-medium'
+                ? 'border-b-2 border-gray-800 pb-2 text-black font-medium'
                 : 'text-gray-800 font-medium'
             }`}
             to="/json-viewer"
