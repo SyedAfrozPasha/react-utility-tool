@@ -241,7 +241,7 @@ export default function JSONViewer() {
       <HeroSection
         title="String Utility Tool"
         description1="A simple tool to convert a value into desired value by passing
-          appropriate value in the below converter settings."
+          appropriate config values in the below converter settings."
         description2="Enter your data on the left and add your desired config values, hit the Run button, and boom!, desired data on the right."
         getNavigation={navigateToTool}
       />

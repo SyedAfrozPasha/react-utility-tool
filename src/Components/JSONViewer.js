@@ -192,7 +192,7 @@ export default function JSONViewer() {
         description1="A simple tool to view the beautified, minified or stringified JSON
           data."
         description2="Paste the JSON data below and Try to beautify, minify or stringify the
-          JSON data using below buttons."
+          JSON data."
         getNavigation={navigateToTool}
       />
       {/* <section className="bg-teal-100 p-8 text-center">

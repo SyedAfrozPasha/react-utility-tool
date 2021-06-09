@@ -6,7 +6,15 @@ export default function Header() {
   const { pathname } = useLocation();
   const splitLocation = pathname.split('/');
 
-  const handleClick = () => {
+  const handleMenuClick = () => {
+    if (toggleClass === 'hidden') {
+      setToggleClass('md:flex');
+    } else {
+      setToggleClass('hidden');
+    }
+  };
+
+  const handleLinkClick = () => {
     if (toggleClass === 'hidden') {
       setToggleClass('md:flex');
     } else {
@@ -24,7 +32,7 @@ export default function Header() {
       <div className="block md:hidden">
         <button
           className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-800 hover:text-white focus:outline-none"
-          onClick={handleClick}
+          onClick={handleMenuClick}
         >
           <svg
             className="fill-current h-3 w-3"
@@ -47,6 +55,7 @@ export default function Header() {
                 : 'text-gray-800 font-medium'
             }`}
             to="/string-utility-tool"
+            onClick={handleLinkClick}
           >
             String Utility Tool
           </Link>
@@ -57,6 +66,7 @@ export default function Header() {
                 : 'text-gray-800 font-medium'
             }`}
             to="/json-viewer"
+            onClick={handleLinkClick}
           >
             JSON Viewer
           </Link>
