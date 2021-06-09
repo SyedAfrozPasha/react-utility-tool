@@ -239,12 +239,12 @@ export default function JSONViewer() {
           <div className="col sm:w-1/2">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
-                <h3 className="text-lg text-grey-darker font-medium text-left">
-                  Input
+                <h3 className="text-lg text-gray-700 font-medium text-left">
+                  Input ⌨
                 </h3>
                 <button
                   role="button"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1 px-2 border border-blue-700 rounded"
+                  className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded"
                   onClick={clearContent}
                 >
                   Clear 🧹
@@ -252,7 +252,7 @@ export default function JSONViewer() {
                 <span className="relative inline-flex rounded-md shadow-sm">
                   <button
                     role="button"
-                    className={`inline-flex item-center bg-blue-500 hover:bg-blue-700 text-white font-medium py-1 px-2 border border-blue-700 rounded ${
+                    className={`inline-flex item-center bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded ${
                       isLoading
                         ? 'bg-green-500 hover:bg-green-700'
                         : 'bg-blue-500 hover:bg-blue-700'
@@ -311,12 +311,12 @@ export default function JSONViewer() {
           <div id="output-value" className="col mt-8 sm:ml-8 sm:mt-0 sm:w-1/2">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b flex justify-between">
-                <h3 className="text-lg text-grey-darker font-medium text-left">
-                  Output
+                <h3 className="text-lg text-gray-700 font-medium text-left">
+                  Output 🖥
                 </h3>
                 <button
                   role="button"
-                  className={`${copyColor} text-white font-medium py-1 px-2 border border-blue-700 rounded ${
+                  className={`${copyColor} text-steel-700 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded ${
                     copyLegend === 'Copied!'
                       ? 'opacity-50 cursor-not-allowed'
                       : ''
@@ -342,13 +342,13 @@ export default function JSONViewer() {
           <div className="col w-screen">
             <div className="box border rounded flex flex-col shadow bg-white p-4 mb-8">
               <div className="bg-grey-lighter pb-2 mb-2 border-b">
-                <h3 className="text-lg text-grey-darker font-medium text-center">
-                  Converter Options
+                <h3 className="text-lg text-gray-700 font-medium text-center">
+                  Converter Options ⚙
                 </h3>
               </div>
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Wrap the entire content with start and end value
                   </label>
                 </div>
@@ -390,7 +390,7 @@ export default function JSONViewer() {
 
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Wrap each item with start and end value
                   </label>
                 </div>
@@ -432,7 +432,7 @@ export default function JSONViewer() {
 
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Add any delimiter between each item
                   </label>
                 </div>
@@ -459,7 +459,7 @@ export default function JSONViewer() {
 
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Remove whitespaces?
                   </label>
                 </div>
@@ -494,7 +494,7 @@ export default function JSONViewer() {
 
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
-                  <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                  <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
                     Remove duplicates?
                   </label>
                 </div>
