@@ -16,14 +16,14 @@ export default function Header() {
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
         <span className="font-semibold text-xl tracking-tight">
           Simple Utility Tool 🚀
         </span>
       </div>
       <div className="block md:hidden">
         <button
-          className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+          className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-800 hover:text-white focus:outline-none"
           onClick={handleClick}
         >
           <svg
@@ -43,8 +43,8 @@ export default function Header() {
           <Link
             className={`block mt-4 md:inline-block md:mt-0 hover:text-black mr-4 ${
               splitLocation[1] === 'string-utility-tool'
-                ? 'text-white font-medium'
-                : 'text-teal-200'
+                ? 'border-b-2 border-gray-800 pb-2 text-gray-800 font-medium'
+                : 'text-gray-800 font-medium'
             }`}
             to="/string-utility-tool"
           >
@@ -53,8 +53,8 @@ export default function Header() {
           <Link
             className={`block mt-4 md:inline-block md:mt-0  hover:text-black mr-4 ${
               splitLocation[1] === 'json-viewer'
-                ? 'text-white font-medium'
-                : 'text-teal-200'
+                ? 'border-b-2 border-gray-800 pb-2 text-gray-800 font-medium'
+                : 'text-gray-800 font-medium'
             }`}
             to="/json-viewer"
           >
