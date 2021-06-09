@@ -198,13 +198,13 @@ export default function JSONViewer() {
           <div className="col w-full">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b">
-                <div className="flex text-lg text-grey-darker font-medium justify-center">
+                <div className="flex text-lg text-gray-700 font-medium justify-center">
                   JSON Viewer
                 </div>
                 <div className="flex flex-wrap justify-center">
                   <button
                     role="button"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
+                    className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
                     onClick={stringifyJSON}
                     title="Convert JSON into plain string"
                   >
@@ -212,7 +212,7 @@ export default function JSONViewer() {
                   </button>
                   <button
                     role="button"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
+                    className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
                     onClick={minifyJSON}
                     title="Minify the JSON - Remove all the whitespaces"
                   >
@@ -230,7 +230,7 @@ export default function JSONViewer() {
                   <span className="relative inline-flex rounded-md shadow-sm">
                     <button
                       role="button"
-                      className="inline-flex item-center bg-blue-500 hover:bg-blue-700 text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
+                      className="inline-flex item-center bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
                       onClick={beautifyJSON}
                       title="Convert the JSON into readable format"
                     >
@@ -246,14 +246,14 @@ export default function JSONViewer() {
 
                   <button
                     role="button"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
+                    className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 mr-2 mt-2 border border-blue-700 rounded"
                     onClick={clearContent}
                   >
                     Clear
                   </button>
                   <button
                     role="button"
-                    className={`${copyColor} text-white font-medium py-1 px-2 mt-2 border border-blue-700 rounded ${
+                    className={`${copyColor} text-steel-800 hover:text-white font-medium py-1 px-2 mt-2 border border-blue-700 rounded ${
                       copyLegend === 'Copied!'
                         ? 'opacity-50 cursor-not-allowed'
                         : ''
