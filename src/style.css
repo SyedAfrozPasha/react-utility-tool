@@ -43,3 +43,7 @@ body {
 .footer > ul > li > a {
   text-decoration: none;
 }
+
+#jsondata {
+  font-family: courier, monospace;
+}

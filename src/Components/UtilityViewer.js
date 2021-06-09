@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import HeroSection from './HeroSection';
 
 export default function JSONViewer() {
   const [inputData, setInputData] = useState();
@@ -150,12 +151,48 @@ export default function JSONViewer() {
     return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
   };
 
-  const navigateToTool = e => {
+  // const navigateToTool = e => {
+  //   let navigate =
+  //     e.target.dataset && e.target.dataset.nav ? e.target.dataset.nav : null;
+  //   if (navigate) {
+  //     let isExample =
+  //       e.target.dataset && e.target.dataset.example ? true : false;
+  //     if (isExample) {
+  //       setConfig({
+  //         ...config,
+  //         ['content-start-separator']: '[',
+  //         ['content-end-separator']: ']',
+  //         ['element-start-separator']: '"',
+  //         ['element-end-separator']: '"',
+  //         ['middle-separator']: ','
+  //       });
+
+  //       setInputData('Apple\nBanana\nMango\nGrape');
+
+  //       document.getElementById('content-start-separator').value = '[';
+  //       document.getElementById('content-end-separator').value = ']';
+  //       document.getElementById('element-start-separator').value = '"';
+  //       document.getElementById('element-end-separator').value = '"';
+  //       document.getElementById('middle-separator').value = ',';
+  //       document.getElementById('input').value = 'Apple\nBanana\nMango\nGrape';
+
+  //       setIsSampleExample(true);
+  //     }
+
+  //     setTimeout(() => {
+  //       const id = e.target.dataset.nav;
+  //       const element = document.getElementById(id);
+  //       if (element) element.scrollIntoView();
+  //     }, 0);
+  //   }
+  // };
+
+  const navigateToTool = propEvent => {
     let navigate =
-      e.target.dataset && e.target.dataset.nav ? e.target.dataset.nav : null;
+      propEvent.dataset && propEvent.dataset.nav ? propEvent.dataset.nav : null;
     if (navigate) {
       let isExample =
-        e.target.dataset && e.target.dataset.example ? true : false;
+        propEvent.dataset && propEvent.dataset.example ? true : false;
       if (isExample) {
         setConfig({
           ...config,
@@ -179,7 +216,7 @@ export default function JSONViewer() {
       }
 
       setTimeout(() => {
-        const id = e.target.dataset.nav;
+        const id = propEvent.dataset.nav;
         const element = document.getElementById(id);
         if (element) element.scrollIntoView();
       }, 0);
@@ -201,7 +238,15 @@ export default function JSONViewer() {
 
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
-      <section className="bg-teal-100 p-8 text-center">
+      <HeroSection
+        title="String Utility Tool"
+        description1="A simple tool to convert a value into desired value by passing
+          appropriate value in the below converter settings."
+        description2="Enter your data on the left and add your desired config values, hit the Run button, and boom!, desired data on the right."
+        getNavigation={navigateToTool}
+      />
+
+      {/* <section className="bg-teal-100 p-8 text-center">
         <h1 className="text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
           String Utility Tool
         </h1>
@@ -233,7 +278,7 @@ export default function JSONViewer() {
             Get Started
           </button>
         </div>
-      </section>
+      </section> */}
       <div id="tool-start" className="p-8">
         <div className="row sm:flex">
           <div className="col sm:w-1/2">

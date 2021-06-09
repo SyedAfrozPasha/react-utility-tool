@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import HeroSection from './HeroSection';
 
 export default function JSONViewer() {
   const [data, setData] = useState();
@@ -132,12 +133,38 @@ export default function JSONViewer() {
     return true;
   };
 
-  const navigateToTool = e => {
+  // const navigateToTool = e => {
+  //   let navigate =
+  //     e.target.dataset && e.target.dataset.nav ? e.target.dataset.nav : null;
+  //   if (navigate) {
+  //     let isExample =
+  //       e.target.dataset && e.target.dataset.example ? true : false;
+  //     if (isExample) {
+  //       let example = {
+  //         name: 'John',
+  //         age: 30,
+  //         city: 'New York'
+  //       };
+  //       setData(example);
+  //       setIsSampleExample(true);
+
+  //       document.getElementById('jsondata').value = JSON.stringify(example);
+  //     }
+
+  //     setTimeout(() => {
+  //       const id = e.target.dataset.nav;
+  //       const element = document.getElementById(id);
+  //       if (element) element.scrollIntoView();
+  //     }, 0);
+  //   }
+  // };
+
+  const navigateToTool = propEvent => {
     let navigate =
-      e.target.dataset && e.target.dataset.nav ? e.target.dataset.nav : null;
+      propEvent.dataset && propEvent.dataset.nav ? propEvent.dataset.nav : null;
     if (navigate) {
       let isExample =
-        e.target.dataset && e.target.dataset.example ? true : false;
+        propEvent.dataset && propEvent.dataset.example ? true : false;
       if (isExample) {
         let example = {
           name: 'John',
@@ -151,7 +178,7 @@ export default function JSONViewer() {
       }
 
       setTimeout(() => {
-        const id = e.target.dataset.nav;
+        const id = propEvent.dataset.nav;
         const element = document.getElementById(id);
         if (element) element.scrollIntoView();
       }, 0);
@@ -160,7 +187,15 @@ export default function JSONViewer() {
 
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
-      <section className="bg-teal-100 p-8 text-center">
+      <HeroSection
+        title="JSON Viewer"
+        description1="A simple tool to view the beautified, minified or stringified JSON
+          data."
+        description2="Paste the JSON data below and Try to beautify, minify or stringify the
+          JSON data using below buttons."
+        getNavigation={navigateToTool}
+      />
+      {/* <section className="bg-teal-100 p-8 text-center">
         <h1 className="text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
           JSON Viewer
         </h1>
@@ -192,7 +227,7 @@ export default function JSONViewer() {
             Get Started
           </button>
         </div>
-      </section>
+      </section> */}
       <div id="tool-start" className="p-8">
         <div className="row flex">
           <div className="col w-full">

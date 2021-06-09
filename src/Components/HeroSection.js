@@ -1,34 +1,42 @@
 import React from 'react';
 
-export default function HeroSection({ title, description }) {
+export default function HeroSection({
+  title,
+  description1,
+  description2,
+  getNavigation
+}) {
+  const navigateTool = e => {
+    e.preventDefault();
+    getNavigation(e.target);
+  };
+
   return (
     <section className="bg-teal-100 p-8 text-center">
       <h1 className="text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
-        String Utility Tool
+        {title}
       </h1>
 
-      <p className="text-gray-700 text-lg mb-4">
-        A simple tool to convert a value into desired value by passing
-        appropriate value in the below converter settings.
-      </p>
-      <p className="text-gray-700 text-lg mb-8">
-        Enter your data on the left and add your desired config, hit the{' '}
-        <i>Run</i> button, and boom!, desired data on the right.
-      </p>
+      <p className="text-gray-700 text-lg mb-4">{description1}</p>
+      <p className="text-gray-700 text-lg mb-8">{description2}</p>
 
-      <div className="space-x-2">
-        <a
-          href="#"
-          className="py-3 px-8 bg-gray-400 hover:bg-gray-300 text-gray-800 hover:text-gray-900 rounded-lg hover:shadow-xl transition duration-300"
+      <div className="flex flex-wrap justify-center space-x-2">
+        <button
+          role="button"
+          data-nav="tool-start"
+          data-example="true"
+          className="py-3 px-8 mb-2 bg-gray-400 hover:bg-gray-300 text-gray-800 hover:text-gray-900 rounded-lg hover:shadow-xl transition duration-300 focus:outline-none"
+          onClick={navigateTool}
         >
           Try an example
-        </a>
-        <a
-          href="#"
-          className="py-3 px-8 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 rounded-lg hover:shadow-xl transition duration-300"
+        </button>
+        <button
+          data-nav="tool-start"
+          className="py-3 px-8 mb-2 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 rounded-lg hover:shadow-xl transition duration-300 focus:outline-none"
+          onClick={navigateTool}
         >
           Get Started
-        </a>
+        </button>
       </div>
     </section>
   );
