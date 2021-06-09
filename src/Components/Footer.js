@@ -8,6 +8,7 @@ export default function Footer() {
         <li>
           <a
             target="_blank"
+            rel="noreferrer"
             className="no-underline hover:underline"
             href="https://github.com/SyedAfrozPasha"
           >
@@ -17,6 +18,7 @@ export default function Footer() {
         <li>
           <a
             target="_blank"
+            rel="noreferrer"
             className="no-underline hover:underline"
             href="https://www.linkedin.com/in/syedafrozpasha"
           >
