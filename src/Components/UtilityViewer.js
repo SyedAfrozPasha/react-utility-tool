@@ -9,10 +9,17 @@ export default function JSONViewer() {
   const [isLoading, setIsLoading] = useState(false);
   const [copyLegend, setCopyLegend] = useState('Copy 📄');
   const [copyColor, setCopyColor] = useState('bg-blue-500 hover:bg-blue-700');
+  const [seperateByNewLineFlag, setSeperateByNewLineFlag] = useState(true);
 
   const clearContent = () => {
     document.getElementById('input').value = '';
     setInputData();
+    // setOutputData();
+  };
+
+  const clearContentOutput = () => {
+    document.getElementById('output').value = '';
+    // setInputData();
     setOutputData();
   };
 
@@ -68,15 +75,34 @@ export default function JSONViewer() {
     }
   };
 
+  const setContentSeperator = e => {
+    let value = e.target.value;
+    if (value === 'New Lines') {
+      setConfig({ ...config, seperateByNewLine: true });
+      setSeperateByNewLineFlag(true);
+    } else {
+      setConfig({
+        ...config,
+        seperateByNewLine: false,
+        removeWhiteSpace: false
+      });
+      setSeperateByNewLineFlag(false);
+      document.getElementById('removeWhiteSpaceFalse').checked = true;
+    }
+  };
+
   const runFormatter = () => {
     setIsSampleExample(false);
     if (inputData && !isObjectEmpty(config)) {
       setIsLoading(true);
       let input = inputData;
+      let newLineRegex = /(\r\n|\r|\n){2,}/g;
+      let spaceRegex = /\s/g;
 
       // Remove duplicates
       if (config.removeDuplicates) {
-        let valueWithOneNewLine = input.replace(/(\r\n|\r|\n){2,}/g, '\n');
+        let regex = seperateByNewLineFlag ? newLineRegex : spaceRegex;
+        let valueWithOneNewLine = input.replace(regex, '\n');
         let arrayOfValues = valueWithOneNewLine.split('\n');
         let hashObj = {};
         let resultArray = [];
@@ -97,7 +123,8 @@ export default function JSONViewer() {
         config['element-start-separator'] ||
         config['element-end-separator']
       ) {
-        let valueWithOneNewLine = input.replace(/(\r\n|\r|\n){2,}/g, '\n');
+        let regex = seperateByNewLineFlag ? newLineRegex : spaceRegex;
+        let valueWithOneNewLine = input.replace(regex, '\n');
         let splittedValues = valueWithOneNewLine.split('\n');
 
         let startValue = config['element-start-separator'] || '';
@@ -128,7 +155,8 @@ export default function JSONViewer() {
 
       // Add delimiter
       if (config['middle-separator']) {
-        let valueWithOneNewLine = input.replace(/(\r\n|\r|\n){2,}/g, '\n');
+        let regex = seperateByNewLineFlag ? newLineRegex : spaceRegex;
+        let valueWithOneNewLine = input.replace(regex, '\n');
         let splittedValues = valueWithOneNewLine.split('\n');
         let separator = config['middle-separator'] || '';
         input = splittedValues.join(`${separator}`);
@@ -200,7 +228,8 @@ export default function JSONViewer() {
           ['content-end-separator']: ']',
           ['element-start-separator']: '"',
           ['element-end-separator']: '"',
-          ['middle-separator']: ','
+          ['middle-separator']: ',',
+          ['seperateByNewLine']: true
         });
 
         setInputData('Apple\nBanana\nMango\nGrape');
@@ -327,11 +356,7 @@ export default function JSONViewer() {
                         />
                       </svg>
                     )}
-                    {isLoading
-                      ? 'Processing'
-                      : isSampleExample
-                      ? 'Click here to Run ▶'
-                      : 'Run ▶'}
+                    {isLoading ? 'Processing' : 'Run ▶'}
                   </button>
                   {isSampleExample && (
                     <span className="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
@@ -361,6 +386,13 @@ export default function JSONViewer() {
                 </h3>
                 <button
                   role="button"
+                  className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded"
+                  onClick={clearContentOutput}
+                >
+                  Clear 🧹
+                </button>
+                <button
+                  role="button"
                   className={`${copyColor} text-steel-700 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded ${
                     copyLegend === 'Copied!'
                       ? 'opacity-50 cursor-not-allowed'
@@ -375,6 +407,7 @@ export default function JSONViewer() {
               <textarea
                 className="text-grey-darkest flex-1 p-2 m-1 bg-transparent focus:outline-none font-mono"
                 name="output"
+                id="output"
                 cols="30"
                 rows="15"
                 value={outputData}
@@ -391,6 +424,42 @@ export default function JSONViewer() {
                   Converter Options ⚙
                 </h3>
               </div>
+
+              <div className="md:flex md:items-center mb-2">
+                <div className="md:w-1/3">
+                  <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                    Seperator the content by?
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <div className="flex -mx-3 mb-2">
+                    <div className="w-full px-3 mb-6 md:mb-0 content-center">
+                      <label className="inline-flex items-center mt-3">
+                        <input
+                          type="radio"
+                          name="contentSeperator"
+                          className="form-radio h-5 w-5 text-gray-600"
+                          onChange={setContentSeperator}
+                          value="Spaces"
+                        />
+                        <span className="ml-2 text-gray-700">Spaces</span>
+                      </label>
+                      <label className="inline-flex items-center mt-3 ml-4">
+                        <input
+                          type="radio"
+                          name="contentSeperator"
+                          className="form-radio h-5 w-5 text-red-600"
+                          onChange={setContentSeperator}
+                          value="New Lines"
+                          defaultChecked
+                        />
+                        <span className="ml-2 text-gray-700">New Lines</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3">
                   <label className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
@@ -515,20 +584,27 @@ export default function JSONViewer() {
                         <input
                           type="radio"
                           name="removeWhiteSpace"
-                          className="form-radio h-5 w-5 text-gray-600"
+                          className={`form-radio h-5 w-5 text-gray-600 ${
+                            seperateByNewLineFlag ? '' : 'cursor-not-allowed'
+                          }`}
                           onChange={setRemoveWhiteSpaceFlag}
                           value={true}
+                          disabled={seperateByNewLineFlag ? '' : 'true'}
                         />
                         <span className="ml-2 text-gray-700">Yes</span>
                       </label>
                       <label className="inline-flex items-center mt-3 ml-4">
                         <input
                           type="radio"
+                          id="removeWhiteSpaceFalse"
                           name="removeWhiteSpace"
-                          className="form-radio h-5 w-5 text-red-600"
+                          className={`form-radio h-5 w-5 text-gray-600 ${
+                            seperateByNewLineFlag ? '' : 'cursor-not-allowed'
+                          }`}
                           onChange={setRemoveWhiteSpaceFlag}
                           value={false}
                           defaultChecked
+                          disabled={seperateByNewLineFlag ? '' : 'true'}
                         />
                         <span className="ml-2 text-gray-700">No</span>
                       </label>
@@ -560,7 +636,7 @@ export default function JSONViewer() {
                         <input
                           type="radio"
                           name="removeDuplicate"
-                          className="form-radio h-5 w-5 text-red-600"
+                          className="form-radio h-5 w-5 text-gray-600"
                           onChange={setRemoveDuplicateFlag}
                           value={false}
                           defaultChecked
