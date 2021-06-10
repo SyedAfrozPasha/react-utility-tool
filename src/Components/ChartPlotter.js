@@ -6,7 +6,7 @@ export default function ChartPlotter() {
   const [data, setData] = useState();
   const [dropDownProps, setDropDownProps] = useState([]);
   const [isSampleExample, setIsSampleExample] = useState(false);
-  const [config, setConfig] = useState({});
+  const [config, setConfig] = useState({ chartColor: '#42A5F5' });
   const [isValidJSON, setIsValidJSON] = useState(true);
   const [plotted, setPlotted] = useState(false);
 
@@ -26,8 +26,10 @@ export default function ChartPlotter() {
     document.getElementById('x-axis').value = '';
     document.getElementById('y-axis').value = '';
     document.getElementById('chart-title').value = '';
+    document.getElementById('chart-color-text').value = '#42A5F5';
+    document.getElementById('chart-color').value = '#42A5F5';
     setData();
-    setConfig({});
+    setConfig({ chartColor: '#42A5F5' });
     if (isSampleExample) setIsSampleExample(false);
   };
 
@@ -39,11 +41,13 @@ export default function ChartPlotter() {
     } else {
       setData();
       setIsValidJSON(false);
-      setConfig({});
+      setConfig({ chartColor: '#42A5F5' });
       setPlotted(false);
       document.getElementById('x-axis').value = '';
       document.getElementById('y-axis').value = '';
       document.getElementById('chart-title').value = '';
+      document.getElementById('chart-color-text').value = '#42A5F5';
+      document.getElementById('chart-color').value = '#42A5F5';
     }
   };
 
@@ -65,6 +69,8 @@ export default function ChartPlotter() {
       setConfig({ ...config, yAxisProp: value });
     } else if (id === 'chart-title' && value) {
       setConfig({ ...config, chartTitle: value });
+    } else if ((id === 'chart-color' || id === 'chart-color-text') && value) {
+      setConfig({ ...config, chartColor: value.toUpperCase() });
     }
   };
 
@@ -112,12 +118,15 @@ export default function ChartPlotter() {
           ...config,
           xAxisProp: 'year',
           yAxisProp: 'population',
-          chartTitle: 'World Population'
+          chartTitle: 'World Population',
+          chartColor: '#42A5F5'
         });
         setData(data);
 
         document.getElementById('x-axis').value = 'year';
         document.getElementById('y-axis').value = 'population';
+        document.getElementById('chart-color').value = '#42A5F5';
+        document.getElementById('chart-color-text').value = '#42A5F5';
         document.getElementById('chart-title').value = 'World Population';
         document.getElementById('chart-input').value = JSON.stringify(
           data,
@@ -301,6 +310,41 @@ export default function ChartPlotter() {
                     </div>
                   </div>
                 </div>
+
+                <div className="md:flex md:items-center">
+                  <div className="md:w-1/3">
+                    <label
+                      className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4 md:pb-8"
+                      htmlFor="chart-color"
+                    >
+                      Pick the color of the chart
+                    </label>
+                  </div>
+                  <div className="md:w-2/3">
+                    <div className="flex -mx-3 mb-6">
+                      <div className="w-1/3 px-3 mb-6 md:mb-0">
+                        <input
+                          className="appearance-none block w-full  h-10 mt-1 bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="chart-color"
+                          type="color"
+                          placeholder="Chart Title"
+                          onChange={storeConfig}
+                          value={config.chartColor}
+                        />
+                      </div>
+                      <div className="w-2/3 px-3 mb-6 md:mb-0">
+                        <input
+                          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="chart-color-text"
+                          type="text"
+                          placeholder="Color"
+                          onChange={storeConfig}
+                          value={config.chartColor}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -313,17 +357,18 @@ export default function ChartPlotter() {
                 id="output"
                 className="box border rounded flex flex-col shadow bg-white p-4 mb-8"
               >
-                <div className="bg-grey-lighter pb-2 mb-2 border-b">
+                {/* <div className="bg-grey-lighter pb-2 mb-2 border-b">
                   <h3 className="text-lg text-gray-700 font-medium text-center">
                     Chart 📊
                   </h3>
-                </div>
+                </div> */}
                 <div className=" mb-2">
                   <BarChart
                     data={data}
                     chartTitle={config.chartTitle}
                     xAxisProp={config.xAxisProp}
                     yAxisProp={config.yAxisProp}
+                    chartColor={config.chartColor || '#42A5F5'}
                   />
                 </div>
               </div>

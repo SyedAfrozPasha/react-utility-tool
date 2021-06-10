@@ -9,14 +9,24 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
 
-export default function BarChart({ data, chartTitle, xAxisProp, yAxisProp }) {
+export default function BarChart({
+  data,
+  chartTitle,
+  xAxisProp,
+  yAxisProp,
+  chartColor
+}) {
   return (
     <Paper>
       <Chart data={data}>
         <ArgumentAxis />
         <ValueAxis max={7} />
 
-        <BarSeries valueField={yAxisProp} argumentField={xAxisProp} />
+        <BarSeries
+          valueField={yAxisProp}
+          argumentField={xAxisProp}
+          color={chartColor}
+        />
         {chartTitle && <Title text={chartTitle} />}
         <Animation />
       </Chart>
