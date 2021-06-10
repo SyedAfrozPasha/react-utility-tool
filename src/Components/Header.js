@@ -70,6 +70,17 @@ export default function Header() {
           >
             JSON Viewer
           </Link>
+          <Link
+            className={`block mt-4 md:inline-block md:mt-0  hover:text-black mr-4 ${
+              splitLocation[1] === 'chart-builder'
+                ? 'border-b-2 border-gray-800 pb-2 text-black font-medium'
+                : 'text-gray-800 font-medium'
+            }`}
+            to="/chart-builder"
+            onClick={handleLinkClick}
+          >
+            Chart Builder
+          </Link>
         </div>
       </div>
     </nav>
