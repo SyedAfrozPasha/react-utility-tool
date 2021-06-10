@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import HeroSection from './HeroSection';
 import BarChart from './BarChart';
 
-export default function ChartBuilder() {
+export default function ChartPlotter() {
   const [data, setData] = useState();
   const [dropDownProps, setDropDownProps] = useState([]);
-  const [formattedData, setFormattedData] = useState();
   const [isSampleExample, setIsSampleExample] = useState(false);
   const [config, setConfig] = useState({});
-  const [hasStringified, setHasStringified] = useState(false);
   const [isValidJSON, setIsValidJSON] = useState(true);
   const [plotted, setPlotted] = useState(false);
 
@@ -23,87 +21,13 @@ export default function ChartBuilder() {
     }
   }, [data]);
 
-  const beautifyJSON = () => {
-    if (isSampleExample) setIsSampleExample(false);
-    if (!isValidJSON) {
-      alert('Invalid JSON - Please paste the valid JSON');
-    }
-
-    if (data) {
-      let formatData = JSON.stringify(data, null, 2);
-      setFormattedData(formatData);
-      setHasStringified(false);
-    }
-  };
-
-  const minifyJSON = () => {
-    if (isSampleExample) setIsSampleExample(false);
-    if (!isValidJSON) {
-      alert('Invalid JSON - Please paste the valid JSON');
-    }
-    if (!hasStringified) {
-      if (formattedData) {
-        let formatData = JSON.stringify(JSON.parse(formattedData));
-        setFormattedData(formatData);
-      } else if (data) {
-        let formatData = JSON.stringify(data);
-        setFormattedData(formatData);
-      }
-      setHasStringified(false);
-    } else {
-      if (formattedData) {
-        let formatData = formattedData.replace(/\\/g, '');
-        formatData = formatData.substring(1, formatData.length - 1);
-        setFormattedData(formatData);
-      } else if (data) {
-        let formatData = data.replace(/\\/g, '');
-        formatData = formatData.substring(1, data.length - 1);
-        setFormattedData(formatData);
-      }
-      setHasStringified(false);
-    }
-  };
-
-  const stringifyJSON = () => {
-    if (isSampleExample) setIsSampleExample(false);
-    if (!isValidJSON) {
-      alert('Invalid JSON - Please paste the valid JSON');
-    }
-    if (!hasStringified) {
-      if (formattedData) {
-        let formatData = JSON.stringify(JSON.parse(formattedData));
-        formatData = formatData
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0008/g, '\\b')
-          .replace(/\t/g, '\\t')
-          .replace(/\n/g, '\\n')
-          .replace(/\f/g, '\\f')
-          .replace(/\r/g, '\\r')
-          .replace(/'/g, "\\'")
-          .replace(/"/g, '\\"');
-        setFormattedData(`"${formatData}"`);
-      } else if (data) {
-        let formatData = JSON.stringify(data);
-        formatData = formatData
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0008/g, '\\b')
-          .replace(/\t/g, '\\t')
-          .replace(/\n/g, '\\n')
-          .replace(/\f/g, '\\f')
-          .replace(/\r/g, '\\r')
-          .replace(/'/g, "\\'")
-          .replace(/"/g, '\\"');
-        setFormattedData(`"${formatData}"`);
-      }
-      setHasStringified(true);
-    }
-  };
-
   const clearContent = () => {
     document.getElementById('chart-input').value = '';
+    document.getElementById('x-axis').value = '';
+    document.getElementById('y-axis').value = '';
+    document.getElementById('chart-title').value = '';
     setData();
-    setFormattedData();
-    setHasStringified(false);
+    setConfig({});
     if (isSampleExample) setIsSampleExample(false);
   };
 
@@ -114,9 +38,12 @@ export default function ChartBuilder() {
       setData(JSON.parse(value));
     } else {
       setData();
-      setFormattedData();
-      setHasStringified(false);
       setIsValidJSON(false);
+      setConfig({});
+      setPlotted(false);
+      document.getElementById('x-axis').value = '';
+      document.getElementById('y-axis').value = '';
+      document.getElementById('chart-title').value = '';
     }
   };
 
@@ -143,6 +70,9 @@ export default function ChartBuilder() {
 
   const runPlotter = () => {
     setIsSampleExample(false);
+    if (!isValidJSON) {
+      alert('Invalid JSON - Please paste the valid JSON');
+    }
     if (
       data &&
       !isObjectEmpty(config) &&
@@ -212,9 +142,9 @@ export default function ChartBuilder() {
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
       <HeroSection
-        title="Chart Builder"
-        description1="A simple tool to create a simple chart using the JSON data."
-        description2="Paste the JSON data below and Select x-axis and y-axis values."
+        title="Chart Plotter"
+        description1="A simple tool to plot a chart using the JSON data."
+        description2="Paste the JSON data below and Select x-axis and y-axis values, hit the Plot button, and boom!"
         getNavigation={navigateToTool}
       />
       <div id="tool-start" className="p-8">
@@ -255,6 +185,7 @@ export default function ChartBuilder() {
                 id="chart-input"
                 cols="30"
                 rows="15"
+                spellCheck="false"
                 onChange={storeData}
               />
             </div>
@@ -289,6 +220,7 @@ export default function ChartBuilder() {
                             className="bg-gray-200 text-gray-700 appearance-none border-none inline-block py-3 pl-3 pr-8 rounded leading-tight w-full"
                             id="x-axis"
                             defaultValue=""
+                            value={config.xAxisProp}
                             onChange={storeConfig}
                           >
                             <option disabled value="">
@@ -319,6 +251,7 @@ export default function ChartBuilder() {
                             className="bg-gray-200 text-gray-700 appearance-none border-none inline-block py-3 pl-3 pr-8 rounded leading-tight w-full"
                             id="y-axis"
                             defaultValue=""
+                            value={config.yAxisProp}
                             onChange={storeConfig}
                           >
                             <option disabled value="">

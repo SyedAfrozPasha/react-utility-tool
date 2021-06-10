@@ -51,7 +51,7 @@ export default function Header() {
           <Link
             className={`block mt-4 md:inline-block md:mt-0 hover:text-black mr-4 ${
               splitLocation[1] === 'string-utility-tool'
-                ? 'border-b-2 border-gray-800 pb-2 text-black font-medium'
+                ? 'border-b-2 border-gray-800 text-black font-medium'
                 : 'text-gray-800 font-medium'
             }`}
             to="/string-utility-tool"
@@ -62,7 +62,7 @@ export default function Header() {
           <Link
             className={`block mt-4 md:inline-block md:mt-0  hover:text-black mr-4 ${
               splitLocation[1] === 'json-viewer'
-                ? 'border-b-2 border-gray-800 pb-2 text-black font-medium'
+                ? 'border-b-2 border-gray-800 text-black font-medium'
                 : 'text-gray-800 font-medium'
             }`}
             to="/json-viewer"
@@ -72,14 +72,14 @@ export default function Header() {
           </Link>
           <Link
             className={`block mt-4 md:inline-block md:mt-0  hover:text-black mr-4 ${
-              splitLocation[1] === 'chart-builder'
-                ? 'border-b-2 border-gray-800 pb-2 text-black font-medium'
+              splitLocation[1] === 'chart-plotter'
+                ? 'border-b-2 border-gray-800 text-black font-medium'
                 : 'text-gray-800 font-medium'
             }`}
-            to="/chart-builder"
+            to="/chart-plotter"
             onClick={handleLinkClick}
           >
-            Chart Builder
+            Chart Plotter
           </Link>
         </div>
       </div>

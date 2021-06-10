@@ -12,7 +12,7 @@ import Footer from './Components/Footer';
 
 const UtilityViewer = React.lazy(() => import('./Components/UtilityViewer'));
 const JSONViewer = React.lazy(() => import('./Components/JSONViewer'));
-const ChartBuilder = React.lazy(() => import('./Components/ChartBuilder'));
+const ChartPlotter = React.lazy(() => import('./Components/ChartPlotter'));
 
 export default function App() {
   return (
@@ -27,8 +27,8 @@ export default function App() {
             <Route exact path="/json-viewer">
               <JSONViewer />
             </Route>
-            <Route exact path="/chart-builder">
-              <ChartBuilder />
+            <Route exact path="/chart-plotter">
+              <ChartPlotter />
             </Route>
             <Redirect exact from="/" to="string-utility-tool" />
           </Switch>
