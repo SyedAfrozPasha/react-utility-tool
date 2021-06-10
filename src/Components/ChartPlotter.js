@@ -119,7 +119,11 @@ export default function ChartPlotter() {
         document.getElementById('x-axis').value = 'year';
         document.getElementById('y-axis').value = 'population';
         document.getElementById('chart-title').value = 'World Population';
-        document.getElementById('chart-input').value = JSON.stringify(data);
+        document.getElementById('chart-input').value = JSON.stringify(
+          data,
+          null,
+          2
+        );
 
         setIsSampleExample(true);
       }
