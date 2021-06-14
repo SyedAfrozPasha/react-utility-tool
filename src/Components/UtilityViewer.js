@@ -14,12 +14,10 @@ export default function JSONViewer() {
   const clearContent = () => {
     document.getElementById('input').value = '';
     setInputData();
-    // setOutputData();
   };
 
   const clearContentOutput = () => {
     document.getElementById('output').value = '';
-    // setInputData();
     setOutputData();
   };
 
@@ -179,42 +177,6 @@ export default function JSONViewer() {
     return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
   };
 
-  // const navigateToTool = e => {
-  //   let navigate =
-  //     e.target.dataset && e.target.dataset.nav ? e.target.dataset.nav : null;
-  //   if (navigate) {
-  //     let isExample =
-  //       e.target.dataset && e.target.dataset.example ? true : false;
-  //     if (isExample) {
-  //       setConfig({
-  //         ...config,
-  //         ['content-start-separator']: '[',
-  //         ['content-end-separator']: ']',
-  //         ['element-start-separator']: '"',
-  //         ['element-end-separator']: '"',
-  //         ['middle-separator']: ','
-  //       });
-
-  //       setInputData('Apple\nBanana\nMango\nGrape');
-
-  //       document.getElementById('content-start-separator').value = '[';
-  //       document.getElementById('content-end-separator').value = ']';
-  //       document.getElementById('element-start-separator').value = '"';
-  //       document.getElementById('element-end-separator').value = '"';
-  //       document.getElementById('middle-separator').value = ',';
-  //       document.getElementById('input').value = 'Apple\nBanana\nMango\nGrape';
-
-  //       setIsSampleExample(true);
-  //     }
-
-  //     setTimeout(() => {
-  //       const id = e.target.dataset.nav;
-  //       const element = document.getElementById(id);
-  //       if (element) element.scrollIntoView();
-  //     }, 0);
-  //   }
-  // };
-
   const navigateToTool = propEvent => {
     let navigate =
       propEvent.dataset && propEvent.dataset.nav ? propEvent.dataset.nav : null;
@@ -275,47 +237,17 @@ export default function JSONViewer() {
         getNavigation={navigateToTool}
       />
 
-      {/* <section className="bg-teal-100 p-8 text-center">
-        <h1 className="text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
-          String Utility Tool
-        </h1>
-
-        <p className="text-gray-700 text-lg mb-4">
-          A simple tool to convert a value into desired value by passing
-          appropriate value in the below converter settings.
-        </p>
-        <p className="text-gray-700 text-lg mb-8">
-          Enter your data on the left and add your desired config values, hit
-          the <i>Run</i> button, and boom!, desired data on the right.
-        </p>
-
-        <div className="flex flex-wrap justify-center space-x-2">
-          <button
-            role="button"
-            data-nav="tool-start"
-            data-example="true"
-            className="py-3 px-8 mb-2 bg-gray-400 hover:bg-gray-300 text-gray-800 hover:text-gray-900 rounded-lg hover:shadow-xl transition duration-300 focus:outline-none"
-            onClick={navigateToTool}
-          >
-            Try an example
-          </button>
-          <button
-            data-nav="tool-start"
-            className="py-3 px-8 mb-2 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 rounded-lg hover:shadow-xl transition duration-300 focus:outline-none"
-            onClick={navigateToTool}
-          >
-            Get Started
-          </button>
-        </div>
-      </section> */}
       <div id="tool-start" className="p-8">
         <div className="row sm:flex">
           <div className="col sm:w-1/2">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
-                <h3 className="text-lg text-gray-700 font-medium text-left">
+                <label
+                  htmlFor="input"
+                  className="text-lg text-gray-700 font-medium text-left"
+                >
                   Input ⌨
-                </h3>
+                </label>
                 <button
                   role="button"
                   className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded"
@@ -381,9 +313,12 @@ export default function JSONViewer() {
           <div id="output-value" className="col mt-8 sm:ml-8 sm:mt-0 sm:w-1/2">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b flex justify-between">
-                <h3 className="text-lg text-gray-700 font-medium text-left">
+                <label
+                  htmlFor="output"
+                  className="text-lg text-gray-700 font-medium text-left"
+                >
                   Output 🖥
-                </h3>
+                </label>
                 <button
                   role="button"
                   className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded"
@@ -420,9 +355,9 @@ export default function JSONViewer() {
           <div className="col w-screen">
             <div className="box border rounded flex flex-col shadow bg-white p-4 mb-8">
               <div className="bg-grey-lighter pb-2 mb-2 border-b">
-                <h3 className="text-lg text-gray-700 font-medium text-center">
+                <p className="text-lg text-gray-700 font-medium text-center">
                   Converter Options ⚙
-                </h3>
+                </p>
               </div>
 
               <div className="md:flex md:items-center mb-2">
@@ -589,7 +524,7 @@ export default function JSONViewer() {
                           }`}
                           onChange={setRemoveWhiteSpaceFlag}
                           value={true}
-                          disabled={seperateByNewLineFlag ? '' : 'true'}
+                          disabled={seperateByNewLineFlag ? '' : true}
                         />
                         <span className="ml-2 text-gray-700">Yes</span>
                       </label>
@@ -604,7 +539,7 @@ export default function JSONViewer() {
                           onChange={setRemoveWhiteSpaceFlag}
                           value={false}
                           defaultChecked
-                          disabled={seperateByNewLineFlag ? '' : 'true'}
+                          disabled={seperateByNewLineFlag ? '' : true}
                         />
                         <span className="ml-2 text-gray-700">No</span>
                       </label>
