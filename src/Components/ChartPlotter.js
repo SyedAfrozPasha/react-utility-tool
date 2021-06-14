@@ -165,9 +165,12 @@ export default function ChartPlotter() {
           <div className="col sm:w-1/2">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
-                <h3 className="text-lg text-gray-700 font-medium text-left">
+                <label
+                  htmlFor="chart-input"
+                  className="text-lg text-gray-700 font-medium text-left"
+                >
                   Input ⌨
-                </h3>
+                </label>
                 <button
                   role="button"
                   className="bg-blue-500 hover:bg-blue-700 text-steel-800 hover:text-white font-medium py-1 px-2 border border-blue-700 rounded"
@@ -207,9 +210,9 @@ export default function ChartPlotter() {
           <div id="output-value" className="col mt-8 sm:ml-8 sm:mt-0 sm:w-1/2">
             <div className="box border rounded flex flex-col shadow bg-white">
               <div className="box__title bg-grey-lighter px-3 py-2 border-b flex justify-between">
-                <h3 className="text-lg text-gray-700 font-medium text-center">
+                <p className="text-lg text-gray-700 font-medium text-center">
                   Options ⚙
-                </h3>
+                </p>
               </div>
 
               <div className="bg-grey-lighter p-4">
